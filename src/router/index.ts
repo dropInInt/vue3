@@ -8,17 +8,17 @@ const routes = [
  {
   path: '/home',
   name: 'Home',
-  component: () => import('../views/Index.vue')
+  component: () => import('/@/views/Index.vue')
  },
  {
   path: '/login',
   name: 'Login',
-  component: () => import('../views/login/LoginRegister.vue')
+  component: () => import('/@/views/login/LoginRegister.vue')
  },
  {
   path: '/404',
   name: '404',
-  component: () => import('../views/404/404.vue')
+  component: () => import('/@/views/404/404.vue')
  },
  {
   path: '/:pathMatch(.*)',

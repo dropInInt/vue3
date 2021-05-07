@@ -3,9 +3,9 @@
   <div class="forms-container">
    <div class="signin-signup">
     <!-- 登陆 -->
-    <h1>登录</h1>
+    <LoginForm :loginUser="loginUser" :rules="rules"/>
     <!-- 注册 -->
-    <h1>注册</h1>
+    <RegisterForm :registerUser="registerUser" :rules="registerRules"/>
    </div>
    <div class="panels-container">
     <div class="panel left-panel">
@@ -13,7 +13,7 @@
       <h3>学习</h3>
       <button @click="signUpMode = !signUpMode" class="btn transparent">注册</button>
      </div>
-     <img src="../../assets/img/log.svg" class="image" alt="" />
+     <img src="/@/assets/img/log.svg" class="image" alt="" />
     </div>
     <div class="panel right-panel">
         <div class="content">
@@ -23,19 +23,32 @@
             登录
           </button>
         </div>
-        <img src="../../assets/img/register.svg" class="image" alt="" />
+        <img src="/@/assets/img/register.svg" class="image" alt="" />
       </div>
    </div>
   </div>
  </div>
 </template>
-<script>
+<script lang="ts">
 import { ref } from 'vue'
+// @ts-ignore
+import { loginUser, rules } from '/@/utils/loginValidate'
+// @ts-ignore
+import { registerUser, registerRules } from '/@/utils/registerValidate'
+// @ts-ignore
+import LoginForm from '/@/components/loginForm.vue'
+// @ts-ignore
+import RegisterForm from '/@/components/registerForm.vue'
 export default {
  name: 'LoginRegister',
+ components: {
+  LoginForm,
+  RegisterForm
+ },
  setup() {
-  const signUpMode = ref(false)
-  return { signUpMode }
+  const signUpMode = ref<boolean>(false)
+  
+  return { signUpMode, loginUser, rules, registerUser, registerRules }
  }
 }
 </script>
@@ -380,18 +393,5 @@ form.sign-in-form {
 form.sign-up-form {
   opacity: 0;
   z-index: 1;
-}
-
-/* register */
-.registerForm {
-  margin-top: 20px;
-  background-color: #fff;
-  padding: 20px 40px 20px 20px;
-  border-radius: 5px;
-  box-shadow: 0px 5px 10px #cccc;
-}
-
-.submit_btn {
-  width: 100%;
 }
 </style>>
