@@ -12,27 +12,4 @@ const viteConfig: UserConfig = {
  proxy: {}
 }
 export default viteConfig
-// module.exports = {
-//  pages: {
-//   index: {
-//    index: {
-//     entry: 'src/main.ts'
-//    } 
-//   }
-//  }
-// }
-
-// export default {
-//  base: '/dist',
-//  plugins: [vue()],
-//  alias: [
-//   {find: '@', replacement: resolve(__dirname, 'src')}
-//  ],
-//  base: './',
-//  server: {
-//   port: 8888,
-//   open: true,
-//   cors: true
-//  }
-// }
 
