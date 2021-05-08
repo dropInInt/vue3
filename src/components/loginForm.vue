@@ -36,7 +36,10 @@
 
 <script lang="ts">
 import { ref } from "vue";
+// @ts-ignore
 import axios from "/@/utils/requset";
+import { ElMessage } from 'element-plus'
+import { useRouter } from 'vue-router'
 export default {
   name: "LoginForm",
   props: {
@@ -51,11 +54,23 @@ export default {
   },
   setup() {
     let loginForm: any = ref(null);
+
+    const router = useRouter()
     // 登陆方法
     const handleLogin = () => {
       loginForm.value.validate((valid: boolean) => {
         if (valid) {
-          axios.get("/api/login").then((res: any) => {});
+          axios.get("/login").then((res: any) => {
+            if (res.code === 200) {
+              ElMessage.success({
+                message: '登陆成功',
+                type: 'success'
+              })
+              router.push({ name: 'Home'})
+            } else {
+              ElMessage.error(res.message)
+             }
+          });
         } else {
           console.log("失败");
         }

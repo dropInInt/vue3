@@ -22,7 +22,7 @@ const endLoading = () => {
   loading.close()
 }
 
-axios.defaults.baseURL = 'http://localhost:3001/'
+axios.defaults.baseURL = 'http://192.168.2.11:7654/'
 
 axios.defaults.headers.post["content-type"] = "application/x-www-form-urlencoded;charset=UTF-8"
 
@@ -38,7 +38,7 @@ axios.interceptors.request.use((config: AxiosRequestConfig) => {
 //相应拦截
 axios.interceptors.response.use((response: AxiosResponse<any>) => {
   endLoading()
-  return response
+  return response.data
 }, error => {
   endLoading()
   return Promise.reject(error)
