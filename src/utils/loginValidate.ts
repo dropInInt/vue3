@@ -1,17 +1,17 @@
 import { ref } from 'vue'
 
 interface User {
- account: string;
+ username: string;
  password: string;
 }
 export const loginUser = ref<User>({
- account: '',
+ username: '',
  password: ''
 })
 
 // 校验规则
 interface Rules {
- account: {
+username: {
      message: string;
      required: boolean;
      trigger: string;
@@ -31,7 +31,7 @@ interface Rules {
  })[];
 }
 export const rules = ref<Rules>({
- account: [{
+ username: [{
   message: '请输入账号',
   required: true,
   trigger: 'blur'

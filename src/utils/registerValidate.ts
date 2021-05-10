@@ -1,14 +1,14 @@
 import { ref } from 'vue'
 
 interface User {
-  account: string;
+  username: string;
   email: string;
   password: string;
   password2: string;
   role: string;
 }
 export const registerUser = ref<User>({
-  account: '',
+  username: '',
   email: '',
   password: '',
   password2: '',
@@ -19,7 +19,7 @@ export const registerUser = ref<User>({
 // 校验规则
 
 interface RegisterRules {
-  account: ({
+  username: ({
     message: string;
     required: boolean;
     trigger: string;
@@ -83,7 +83,7 @@ const validatePass2 = (rule: RegisterRules, value: string, callback: any) => {
   }
 }
 export const registerRules = ref<RegisterRules>({
-  account: [{
+  username: [{
     message: '请输入账号',
     required: true,
     trigger: 'blur'

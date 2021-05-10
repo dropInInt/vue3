@@ -1,4 +1,4 @@
-Mock.mock(/login/, 'get',{
+Mock.mock(/login/, 'post',{
  code: 200,
- token: 'hkajsdhklasjdkljaksjflhkqwekfjkqwj123123123klasjdfklajsklf'
+ data: 'hkajsdhklasjdkljaksjflhkqwekfjkqwj123123123klasjdfklajsklf'
 })

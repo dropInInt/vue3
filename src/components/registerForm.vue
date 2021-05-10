@@ -1,7 +1,7 @@
 <template>
   <el-form status-icon :model="registerUser" ref="registerForm" :rules="registerRules" label-width="100px" class="registerForm sign-up-form">
-    <el-form-item label="账号" prop="account">
-      <el-input v-model="registerUser.account" placeholder="请输入账号" autocomplete="off"></el-input>
+    <el-form-item label="账号" prop="username">
+      <el-input v-model="registerUser.username" placeholder="请输入账号" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item label="邮箱" prop="email">
       <el-input v-model="registerUser.email" placeholder="请输入邮箱" autocomplete="off"></el-input>

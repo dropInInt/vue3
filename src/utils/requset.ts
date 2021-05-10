@@ -22,9 +22,9 @@ const endLoading = () => {
   loading.close()
 }
 
-axios.defaults.baseURL = 'http://192.168.2.11:7654/'
+axios.defaults.baseURL = 'http://124.71.200.160:8885/'
 
-axios.defaults.headers.post["content-type"] = "application/x-www-form-urlencoded;charset=UTF-8"
+//axios.defaults.headers.post["content-type"] = "application/x-www-form-urlencoded;charset=UTF-8"
 
 axios.defaults.timeout = 10000
 //请求拦截

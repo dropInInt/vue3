@@ -7,9 +7,9 @@
     label-width="100px"
     class="loginForm sign-in-form"
   >
-    <el-form-item label="账号" prop="account">
+    <el-form-item label="账号" prop="username">
       <el-input
-        v-model="loginUser.account"
+        v-model="loginUser.username"
         placeholder="请输入账号"
         autocomplete="off"
       ></el-input>
@@ -40,6 +40,9 @@ import { ref } from "vue";
 import axios from "/@/utils/requset";
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
+// @ts-ignore
+import { Login } from '/@/api/login/login'
+import { ACCESS_TOKEN } from '../store/muation-type'
 export default {
   name: "LoginForm",
   props: {
@@ -52,7 +55,7 @@ export default {
       require: true,
     },
   },
-  setup() {
+  setup(props: any) {
     let loginForm: any = ref(null);
 
     const router = useRouter()
@@ -60,13 +63,15 @@ export default {
     const handleLogin = () => {
       loginForm.value.validate((valid: boolean) => {
         if (valid) {
-          axios.get("/login").then((res: any) => {
+          console.log(props.loginUser)
+          Login(props.loginUser).then((res: any) => {
             if (res.code === 200) {
               ElMessage.success({
                 message: '登陆成功',
                 type: 'success'
               })
-              router.push({ name: 'Home'})
+              localStorage.setItem(ACCESS_TOKEN, res.data)
+              router.push('/home')
             } else {
               ElMessage.error(res.message)
              }
