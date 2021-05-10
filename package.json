@@ -23,5 +23,10 @@
     "ts-loader": "^9.1.2",
     "typescript": "^4.2.4",
     "vite": "^1.0.0-rc.13"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
   }
 }
