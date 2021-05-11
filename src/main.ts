@@ -6,6 +6,9 @@ import ElementPlus from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css'
 import './mock/mock.js'
 
+// 引入iconfong
+import './assets/iconfont/iconfont.css'
+
 //引入公共樣式
 import './style/index.css'
 

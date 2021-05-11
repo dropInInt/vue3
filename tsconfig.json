@@ -11,8 +11,6 @@
   "include": [
     "src/**/*",
     "src/main.d.ts" //**/递归匹配任意子目录
-    ,
-    "postcss.config.js"
   ],
   "exclude": [
     "node_modules"

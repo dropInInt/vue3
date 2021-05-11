@@ -1,36 +1,24 @@
 <template>
   <el-container>
-    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <LeftMenu />
-    </el-aside>
-
+    <el-header height="65px">
+      <GlobalHeader></GlobalHeader>
+    </el-header>
     <el-container>
-      <el-header style="text-align: right; font-size: 12px">
-        <el-dropdown>
-          <i class="el-icon-setting" style="margin-right: 15px"></i>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item>查看</el-dropdown-item>
-              <el-dropdown-item>新增</el-dropdown-item>
-              <el-dropdown-item>删除</el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-        <span>王小虎</span>
-      </el-header>
-
-      <el-main>
-        <router-view></router-view>
-      </el-main>
+      <el-aside>
+        <LeftMenu />
+      </el-aside>
+      <el-main>Main</el-main>
     </el-container>
   </el-container>
 </template>
 
 <script lang="ts">
 import LeftMenu from "../layouts/components/LeftMenu.vue";
+import GlobalHeader from '../layouts/components/GlobalHeader.vue'
 export default {
   components: {
     LeftMenu,
+    GlobalHeader
   },
   setup() {
     return {};
