@@ -36,12 +36,10 @@
 
 <script lang="ts">
 import { ref } from "vue";
-// @ts-ignore
-import axios from "/@/utils/requset";
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
 // @ts-ignore
-import { Login } from '/@/api/login/login'
+import { Login } from '/@/api/auth/login'
 import { ACCESS_TOKEN } from '../store/muation-type'
 export default {
   name: "LoginForm",
@@ -71,7 +69,7 @@ export default {
                 type: 'success'
               })
               localStorage.setItem(ACCESS_TOKEN, res.data)
-              router.push('/home')
+              router.push('/')
             } else {
               ElMessage.error(res.message)
              }

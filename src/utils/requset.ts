@@ -1,6 +1,13 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from 'axios'
+import { useRouter, Router } from 'vue-router'
+// @ts-ignore
+import { ACCESS_TOKEN } from '/@/store/muation-type'
 
 import { ElLoading } from 'element-plus'
+
+const token: string | null = localStorage.getItem(ACCESS_TOKEN)
+
+const router: Router = useRouter()
 
 let loading: any;
 
@@ -24,11 +31,17 @@ const endLoading = () => {
 
 axios.defaults.baseURL = 'http://124.71.200.160:8885/'
 
-//axios.defaults.headers.post["content-type"] = "application/x-www-form-urlencoded;charset=UTF-8"
+axios.defaults.headers.post["content-type"] = "application/json;charset=UTF-8"
 
 axios.defaults.timeout = 10000
 //请求拦截
-axios.interceptors.request.use((config: AxiosRequestConfig) => {
+axios.interceptors.request.use((config: any) => {
+  const urlList: string[] = config.url.split('/')
+  if (token && token !== 'undefined') {
+    config.headers['Authorization'] = 'Bearer ' + token
+  } else if (!urlList.includes('login')){
+    router.push('/login')
+  }
   startLoading()
   return config
 }, err => {

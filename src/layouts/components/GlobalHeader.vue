@@ -1,9 +1,5 @@
 <template>
   <div class="globalHeader">
-    <div class="system-tip">
-      <i class="iconfont icon-cloudLogo"></i>
-      <span>医院SPD系统</span>
-    </div>
     <div class="header-right">
       <div class="user-help">
 
@@ -37,7 +33,7 @@
 export default {
   name: 'GlobalHeader',
   setup () {
-
+    
 
     return {}
   }
@@ -49,23 +45,6 @@ export default {
   background: #24aaff;
   height: 100%;
   display: flex;
-}
-.system-tip {
-  background: #009afc;
-  height: 65px;
-  border-right: 1px solid #008ce5;
-  width: 199px;
-}
-.system-tip .icon-cloudLogo {
-  font-size: 22px;
-  margin-left: 16px;
-  line-height: 65px;
-  color: #fff;
-}
-.system-tip span {
-  font-size: 17px;
-  margin-left: 15px;
-  color: #fff;
 }
 .header-right {
   flex: 1;
@@ -79,6 +58,7 @@ export default {
   line-height: 32px;
   margin-top: 16px;
   margin-right: 20px;
+  border-radius: 4px;
 }
 .user-info .user-info-toggle {
   height: 100%;
