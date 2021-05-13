@@ -12,36 +12,19 @@
       @close="!isCollapse" 
       :collapse="isCollapse"
       unique-opened="true">
-        <el-submenu index="1">
+      <template v-for="menu in menuList">
+        <el-submenu v-if="menu.children && menu.children.length > 0" :key="menu.name">
           <template #title>
-            <i class="el-icon-location"></i>
-            <span>导航一</span>
+            <i :class="`iconfont icon-${menu.meta.icon}`"></i>
+            <span>{{menu.meta.title}}</span>
           </template>
-          <el-menu-item-group>
-            <template #title>分组一</template>
-            <el-menu-item index="1-1">选项1</el-menu-item>
-            <el-menu-item index="1-2">选项2</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="分组2">
-            <el-menu-item index="1-3">选项3</el-menu-item>
-          </el-menu-item-group>
-          <el-submenu index="1-4">
-            <template #title>选项4</template>
-            <el-menu-item index="1-4-1">选项1</el-menu-item>
-          </el-submenu>
+          <el-menu-item v-for="subMenuList in menu.children" :key="subMenuList.name">{{subMenuList.meta.title}}</el-menu-item>
         </el-submenu>
-        <el-menu-item index="2">
-          <i class="el-icon-menu"></i>
-          <template #title>导航二</template>
+        <el-menu-item v-else :key="menu.name">
+          <i :class="`el-icon-menu iconfont icon-${menu.meta.icon}`"></i>
+          <template #title>{{subMenuList.meta.title}}</template>
         </el-menu-item>
-        <el-menu-item index="3" disabled>
-          <i class="el-icon-document"></i>
-          <template #title>导航三</template>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <i class="el-icon-setting"></i>
-          <template #title>导航四</template>
-        </el-menu-item>
+      </template>
       </el-menu>
       <div class="collapse-change">
         <div class="collapse-bar"></div>
@@ -51,14 +34,11 @@
         <div class="collapse-bar"></div>
       </div>
     </div>
-    <!-- <el-radio-group v-model="isCollapse">
-      <el-radio-button :label="false" @click.prevent="navCollapse()">展开</el-radio-button>
-      <el-radio-button :label="true" @click.prevent="navCollapse()">收起</el-radio-button>
-    </el-radio-group> -->
   </div>
 </template>
 
 <script lang="ts">
+import { generateSyncRouter } from '../../router/routerUtils'
 export default {
   name: 'LeftMenu',
   props: {
@@ -68,11 +48,14 @@ export default {
       default: true
     }
   },
-  setup (props, context) {
-    const navCollapse = () => {
+  setup (props: any, context: any) {
+    const navCollapse: () => void = () => {
       context.emit('navCollapse', !props.isCollapse)
     }
-    return { navCollapse }
+
+    const menuList = JSON.parse(localStorage.getItem('menuList'))
+    console.log(menuList)
+    return { navCollapse, menuList }
   }
 }
 </script>

@@ -2,6 +2,7 @@ import { RouteLocationNormalized, NavigationGuardNext } from 'vue-router'
 import router from '../router'
 import { ACCESS_TOKEN } from '../store/muation-type'
 import NProgress from '../utils/nprogress'
+import { generateSyncRouter } from '../router/routerUtils'
 
 NProgress.configure({ showSpinner: false })
 
@@ -14,7 +15,11 @@ router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, n
       next({path: '/home'})
       NProgress.done()
     } else {
-     next()
+      generateSyncRouter().then((res: any) => {
+        localStorage.setItem('menuList', JSON.stringify(res))
+        next()
+      })
+      
     }
   } else {
     if (whiteList.includes(to.path)) {

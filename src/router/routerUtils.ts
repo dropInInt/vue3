@@ -1,7 +1,7 @@
 import { getSystemMenu } from '../api/auth/auth'
 import BasicLayout from '/@/layouts/BasicLayout.vue'
 
-export const generateSyncRouter = () => {
+export const generateSyncRouter: () => Promise<unknown> = () => {
  return new Promise((resolve, reject) => {
   getSystemMenu().then( (res: any) => {
    const routerData: any[] = formatData(res.data)
@@ -16,7 +16,7 @@ export const generateSyncRouter = () => {
 
 
 // 格式化数据
-const formatData = (routerData: any) => {
+const formatData: (routerData: any) => any[] = (routerData: any) => {
  let newData: any[] = []
  routerData.forEach((item: any) => {
   let obj: any = item
@@ -28,7 +28,7 @@ const formatData = (routerData: any) => {
 }
 
 // 生成router
-const generteRouter = (routerMap: any, parent: any) => {
+const generteRouter: (routerMap: any, parent: any) => any = (routerMap: any, parent: any) => {
  return routerMap.map((item: any) => {
   let currentRouter: any = {
     path: `${(parent && parent.name) || ''}/${item.name}`,

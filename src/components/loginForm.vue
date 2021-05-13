@@ -58,7 +58,7 @@ export default {
 
     const router = useRouter()
     // 登陆方法
-    const handleLogin = () => {
+    const handleLogin: () => void = () => {
       loginForm.value.validate((valid: boolean) => {
         if (valid) {
           console.log(props.loginUser)

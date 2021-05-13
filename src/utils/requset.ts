@@ -11,7 +11,7 @@ const router: Router = useRouter()
 
 let loading: any;
 
-const startLoading = () => {
+const startLoading: () => void = () => {
   interface Options {
     lock: boolean;
     text: string;
@@ -25,11 +25,11 @@ const startLoading = () => {
   loading = ElLoading.service(options)
 }
 
-const endLoading = () => {
+const endLoading: () => void = () => {
   loading.close()
 }
 
-axios.defaults.baseURL = 'http://124.71.200.160:8885/'
+axios.defaults.baseURL = ''
 
 axios.defaults.headers.post["content-type"] = "application/json;charset=UTF-8"
 
@@ -39,8 +39,6 @@ axios.interceptors.request.use((config: any) => {
   const urlList: string[] = config.url.split('/')
   if (token && token !== 'undefined') {
     config.headers['Authorization'] = 'Bearer ' + token
-  } else if (!urlList.includes('login')){
-    router.push('/login')
   }
   startLoading()
   return config
@@ -53,6 +51,8 @@ axios.interceptors.response.use((response: AxiosResponse<any>) => {
   endLoading()
   return response.data
 }, error => {
+  localStorage.clear()
+  location.href = '#/login'
   endLoading()
   return Promise.reject(error)
 })
