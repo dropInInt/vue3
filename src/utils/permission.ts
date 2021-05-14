@@ -7,7 +7,6 @@ import { generateSyncRouter } from '../router/routerUtils'
 NProgress.configure({ showSpinner: false })
 
 const whiteList: string[] = ['/login', '/register']
-
 router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
   NProgress.start()
   if (localStorage.getItem(ACCESS_TOKEN) && localStorage.getItem(ACCESS_TOKEN) !== 'undefined') {

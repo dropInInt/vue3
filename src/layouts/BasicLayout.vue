@@ -7,20 +7,24 @@
       <el-header height="65px">
         <GlobalHeader></GlobalHeader>
       </el-header>
-      <el-main>Main</el-main>
+      <el-main>
+        <AppMain></AppMain>
+      </el-main>
       <el-footer>Footer</el-footer>
     </el-container>
   </el-container>
 </template>
 
 <script lang="ts">
-import { computed, ref, ComputedRef, watch, WatchSource, WatchCallback } from 'vue'
+import { ref } from 'vue'
 import LeftMenu from "../layouts/components/LeftMenu.vue";
 import GlobalHeader from '../layouts/components/GlobalHeader.vue'
+import AppMain from '../layouts/components/AppMain.vue'
 export default {
   components: {
     LeftMenu,
-    GlobalHeader
+    GlobalHeader,
+    AppMain
   },
   setup() {
     let navWidth = ref<string>('200px')

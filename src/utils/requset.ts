@@ -5,8 +5,6 @@ import { ACCESS_TOKEN } from '/@/store/muation-type'
 
 import { ElLoading } from 'element-plus'
 
-const token: string | null = localStorage.getItem(ACCESS_TOKEN)
-
 const router: Router = useRouter()
 
 let loading: any;
@@ -37,6 +35,7 @@ axios.defaults.timeout = 10000
 //请求拦截
 axios.interceptors.request.use((config: any) => {
   const urlList: string[] = config.url.split('/')
+  const token: string | null = localStorage.getItem(ACCESS_TOKEN)
   if (token && token !== 'undefined') {
     config.headers['Authorization'] = 'Bearer ' + token
   }

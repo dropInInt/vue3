@@ -68,6 +68,7 @@ export default {
                 message: '登陆成功',
                 type: 'success'
               })
+              localStorage.clear()
               localStorage.setItem(ACCESS_TOKEN, res.data)
               router.push('/')
             } else {

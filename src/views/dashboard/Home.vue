@@ -1,5 +1,5 @@
 <template>
-  <div class="index" @click="go()">首页</div>
+  <div class="index">首页</div>
 </template>
 <script>
 export default {

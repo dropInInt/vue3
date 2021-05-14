@@ -5,27 +5,36 @@
       <span>医院SPD系统</span>
     </div>
     <div class="menu-area">
-      <el-menu 
-      default-active="1-4-1" 
-      class="el-menu-vertical-demo" 
-      @open="!isCollapse" 
-      @close="!isCollapse" 
-      :collapse="isCollapse"
-      unique-opened="true">
-      <template v-for="menu in menuList">
-        <el-submenu v-if="menu.children && menu.children.length > 0" :key="menu.name">
-          <template #title>
-            <i :class="`iconfont icon-${menu.meta.icon}`"></i>
-            <span>{{menu.meta.title}}</span>
-          </template>
-          <el-menu-item v-for="subMenuList in menu.children" :key="subMenuList.name">{{subMenuList.meta.title}}</el-menu-item>
-        </el-submenu>
-        <el-menu-item v-else :key="menu.name">
-          <i :class="`el-icon-menu iconfont icon-${menu.meta.icon}`"></i>
-          <template #title>{{subMenuList.meta.title}}</template>
-        </el-menu-item>
-      </template>
-      </el-menu>
+      <div class="menu-left-list">
+        <el-scrollbar>
+          <el-menu
+            class="el-menu-vertical-demo"
+            :collapse="isCollapse"
+            :default-active="menuActive"
+            active-text-color="#24aaff"
+            :unique-opened="true">
+            <template v-for="menu in menuList">
+              <el-submenu v-if="menu.children && menu.children.length > 0" :key="menu.name" :index="menu.path">
+                <template #title>
+                  <i :class="`iconfont icon-${menu.meta.icon}`"></i>
+                  <span>{{menu.meta.title}}</span>
+                </template>
+                <el-menu-item 
+                  v-for="subMenuList in menu.children" 
+                  @click="menuSelect(subMenuList.path)" 
+                  :key="subMenuList.name" 
+                  :inedx="subMenuList.path">
+                    {{subMenuList.meta.title}}
+                  </el-menu-item>
+              </el-submenu>
+              <el-menu-item v-else :index="menu.path" :key="menu.name" @click="menuSelect(menu.path)">
+                <i :class="`iconfont icon-${menu.meta.icon}`"></i>
+                <template #title>{{subMenuList.meta.title}}</template>
+              </el-menu-item>
+            </template>
+          </el-menu>
+        </el-scrollbar>
+      </div>
       <div class="collapse-change">
         <div class="collapse-bar"></div>
         <div class="collapse-btn" @click.prevent="navCollapse()">
@@ -38,7 +47,8 @@
 </template>
 
 <script lang="ts">
-import { generateSyncRouter } from '../../router/routerUtils'
+import { ref, Ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 export default {
   name: 'LeftMenu',
   props: {
@@ -53,9 +63,19 @@ export default {
       context.emit('navCollapse', !props.isCollapse)
     }
 
-    const menuList = JSON.parse(localStorage.getItem('menuList'))
-    console.log(menuList)
-    return { navCollapse, menuList }
+    const router = useRouter()
+    const route = useRoute()
+    
+    const active: string = useRoute().path.substring(1, useRoute().path.length)
+
+    let menuActive: Ref<string> = ref(active)
+
+    const menuSelect: (index: any) => void = (index: any) => {
+      menuActive = index
+      router.push('/' +index)
+    }
+    const menuList: any = JSON.parse(localStorage.getItem('menuList'))
+    return { navCollapse, menuList, menuSelect, menuActive }
   }
 }
 </script>
@@ -73,10 +93,14 @@ export default {
   flex-grow: 1;
   border-right: 1px solid #e5e5e5;
 }
+.menu-left-list {
+  height: calc(100vh - 127px);
+  overflow-x: hidden;
+}
 .global-menu .el-menu {
   width: 100%;
   border: none;
-  height: calc(100% - 62px);
+  height: 100%;
 }
 /* system-tip  */
 .system-tip {
