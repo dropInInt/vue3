@@ -23,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/mainSet',
         name: 'MainSet',
-        component: () => import('/@/views//mainSet/departmentManage.vue'),
+        component: () => import('/@/views/mainSet/departmentManage.vue'),
         meta: {
           title: '主数据设置',
           icon: ''
@@ -32,7 +32,7 @@ const routes: Array<RouteRecordRaw> = [
           {
             path: '/mainSet/departmentManage',
             name: 'mainSet',
-            component: () => import('/@/views//mainSet/departmentManage.vue'),
+            component: () => import('/@/views/mainSet/departmentManage.vue'),
             meta: {
               title: '科室管理',
               icon: ''
@@ -52,10 +52,10 @@ const routes: Array<RouteRecordRaw> = [
     name: '404',
     component: () => import('/@/views/404/404.vue')
   },
-  // {
-  //   path: '/:pathMatch(.*)',
-  //   redirect: '/404'
-  // }
+  {
+    path: '/:pathMatch(.*)',
+    redirect: '/404'
+  }
 ]
 
 const router = createRouter({

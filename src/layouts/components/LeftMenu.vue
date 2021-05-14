@@ -8,12 +8,19 @@
       <div class="menu-left-list">
         <el-scrollbar>
           <el-menu
-            class="el-menu-vertical-demo"
             :collapse="isCollapse"
             :default-active="menuActive"
             active-text-color="#24aaff"
-            :unique-opened="true">
-            <template v-for="menu in menuList">
+            mode="vertical"
+            :unique-opened="true"
+          >
+            <SideMenu
+              v-for="menu in menuList"
+              :key="menu.name"
+              :item="menu"
+              :base-path="menu.path"
+            ></SideMenu>
+            <!-- <template v-for="menu in menuList">
               <el-submenu v-if="menu.children && menu.children.length > 0" :key="menu.name" :index="menu.path">
                 <template #title>
                   <i :class="`iconfont icon-${menu.meta.icon}`"></i>
@@ -31,14 +38,17 @@
                 <i :class="`iconfont icon-${menu.meta.icon}`"></i>
                 <template #title>{{subMenuList.meta.title}}</template>
               </el-menu-item>
-            </template>
+            </template> -->
           </el-menu>
         </el-scrollbar>
       </div>
       <div class="collapse-change">
         <div class="collapse-bar"></div>
         <div class="collapse-btn" @click.prevent="navCollapse()">
-          <i class="iconfont" :class="{'icon-retract': !isCollapse, 'icon-open': isCollapse}"></i>
+          <i
+            class="iconfont"
+            :class="{ 'icon-retract': !isCollapse, 'icon-open': isCollapse }"
+          ></i>
         </div>
         <div class="collapse-bar"></div>
       </div>
@@ -47,37 +57,44 @@
 </template>
 
 <script lang="ts">
-import { ref, Ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { ref, Ref } from "vue";
+import path from "path";
+import { useRouter, useRoute } from "vue-router";
+import SideMenu from "./sideBar/SideMenu.vue";
 export default {
-  name: 'LeftMenu',
+  name: "LeftMenu",
+  components: {
+    SideMenu,
+  },
   props: {
     isCollapse: {
       type: Boolean,
       required: true,
-      default: true
-    }
+      default: true,
+    },
   },
-  setup (props: any, context: any) {
+  setup(props: any, context: any) {
     const navCollapse: () => void = () => {
-      context.emit('navCollapse', !props.isCollapse)
-    }
+      context.emit("navCollapse", !props.isCollapse);
+    };
 
-    const router = useRouter()
-    const route = useRoute()
-    
-    const active: string = useRoute().path.substring(1, useRoute().path.length)
+    const router = useRouter();
+    const route = useRoute();
 
-    let menuActive: Ref<string> = ref(active)
+    const active: string = useRoute().name;
+
+    let menuActive: Ref<string> = ref(active);
 
     const menuSelect: (index: any) => void = (index: any) => {
-      menuActive = index
-      router.push('/' +index)
-    }
-    const menuList: any = JSON.parse(localStorage.getItem('menuList'))
-    return { navCollapse, menuList, menuSelect, menuActive }
-  }
-}
+      menuActive = index;
+      router.push("/" + index);
+    };
+    debugger;
+    const menuList: any = JSON.parse(localStorage.getItem("menuList"));
+
+    return { navCollapse, menuList, menuSelect, menuActive };
+  },
+};
 </script>
 
 <style scoped>
