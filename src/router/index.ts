@@ -7,7 +7,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Home',
     component: BasicLayout,
-    redirect: '/dashboard/home',
+    redirect: '/mainSet/departmentManage',
     children: [
       {
         path: '/dashboard/home',

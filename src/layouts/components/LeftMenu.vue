@@ -12,33 +12,14 @@
             :default-active="menuActive"
             active-text-color="#24aaff"
             mode="vertical"
+            @select="menuSelect"
             :unique-opened="true"
           >
             <SideMenu
               v-for="menu in menuList"
               :key="menu.name"
               :item="menu"
-              :base-path="menu.path"
             ></SideMenu>
-            <!-- <template v-for="menu in menuList">
-              <el-submenu v-if="menu.children && menu.children.length > 0" :key="menu.name" :index="menu.path">
-                <template #title>
-                  <i :class="`iconfont icon-${menu.meta.icon}`"></i>
-                  <span>{{menu.meta.title}}</span>
-                </template>
-                <el-menu-item 
-                  v-for="subMenuList in menu.children" 
-                  @click="menuSelect(subMenuList.path)" 
-                  :key="subMenuList.name" 
-                  :inedx="subMenuList.path">
-                    {{subMenuList.meta.title}}
-                  </el-menu-item>
-              </el-submenu>
-              <el-menu-item v-else :index="menu.path" :key="menu.name" @click="menuSelect(menu.path)">
-                <i :class="`iconfont icon-${menu.meta.icon}`"></i>
-                <template #title>{{subMenuList.meta.title}}</template>
-              </el-menu-item>
-            </template> -->
           </el-menu>
         </el-scrollbar>
       </div>
@@ -59,7 +40,7 @@
 <script lang="ts">
 import { ref, Ref } from "vue";
 import path from "path";
-import { useRouter, useRoute } from "vue-router";
+import { useRouter, useRoute, RouteRecordName } from "vue-router";
 import SideMenu from "./sideBar/SideMenu.vue";
 export default {
   name: "LeftMenu",
@@ -81,15 +62,12 @@ export default {
     const router = useRouter();
     const route = useRoute();
 
-    const active: string = useRoute().name;
-
-    let menuActive: Ref<string> = ref(active);
-
-    const menuSelect: (index: any) => void = (index: any) => {
-      menuActive = index;
-      router.push("/" + index);
+    let menuActive = ref<RouteRecordName>(route.path);
+    const menuSelect = (index: string, indexPath: any) => {
+      const curPath: string = indexPath.join('')
+      menuActive.value = curPath;
+      router.push(curPath);
     };
-    debugger;
     const menuList: any = JSON.parse(localStorage.getItem("menuList"));
 
     return { navCollapse, menuList, menuSelect, menuActive };

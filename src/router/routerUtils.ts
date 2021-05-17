@@ -31,7 +31,8 @@ const formatData: (routerData: any) => any[] = (routerData: any) => {
 const generteRouter: (routerMap: any, parent: any) => any = (routerMap: any, parent: any) => {
  return routerMap.map((item: any) => {
   let currentRouter: any = {
-    path: `${(parent && parent.name) || ''}/${item.name}`,
+    //path: `${(parent && parent.name) || ''}/${item.name}`,
+    path: `/${item.name}`,
     name: item.name,
     component: BasicLayout,
     redirect: `${(parent && parent.name) || ''}/${item.name}`,
