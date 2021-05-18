@@ -1,0 +1,122 @@
+@blue: #24aaff;
+@menubg: #f5f5f5;
+.el-menu {
+ >div {
+  >.el-menu-item {
+   &.is-active {
+     border-left-color: #ff9d00;
+     span {
+      color: @blue;
+     }
+   }
+   border-bottom: 1px solid #e5e5e5;
+    border-left: 3px solid #f9f9f9;
+    padding-left: 17px !important;
+   background: @menubg;
+   .iconfont {
+    font-size: 24px;
+     color: @blue;
+   }
+   span {
+    margin-left: 18px;
+    font-size: 14px;
+    font-weight: bold;
+   }
+  }
+  >.el-submenu {
+   background: @menubg;
+   &.is-active {
+    .el-submenu__title {
+     border-left-color: #ff9d00;
+     span {
+      color: @blue;
+     }
+    }
+   }
+   .el-submenu__title {
+    padding-left: 17px !important;
+    border-bottom: 1px solid #e5e5e5;
+    border-left: 3px solid #f9f9f9;
+    .iconfont {
+     font-size: 24px;
+     color: @blue;
+    }
+    span {
+     margin-left: 18px;
+     font-size: 14px;
+     font-weight: bold;
+    }
+    .el-icon-arrow-right {
+     display: none;
+    }
+   }
+   .el-menu-item {
+    border-top: 1px dotted #ccc;
+    font-weight: bold;
+    display: block;
+    font-size: 14px;
+    &.is-active {
+     &::before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      width: 0px;
+      left: 20px;
+      top: 25px;
+      border-top: 1px dotted #9dbdd6;
+     }
+     .iconfont {
+      display: inline-block;
+     }
+    }
+    &::before {
+     content: "";
+     display: inline-block;
+     position: absolute;
+     width: 7px;
+     left: 20px;
+     top: 25px;
+     border-top: 1px dotted #9dbdd6;
+    }
+    .iconfont {
+     font-size: 14px;
+     margin-left: -28px;
+     margin-right: 14px;
+     display: inline-block;
+     display: none;
+    }
+   }
+   .el-menu--inline {
+    &::before {
+     content: "";
+     display: block;
+     position: absolute;
+     z-index: 1;
+     left: 18px;
+     top: 0;
+     bottom: 0;
+     border: 1px dotted #9dbdd6;
+     border-width: 0 0 0 1px;
+    }
+    a {
+     text-decoration: none;
+    }
+   }
+  }
+ }
+}
+
+// 收起之后菜单样式
+.el-popper {
+ .el-menu {
+  a {
+   text-decoration: none;
+   width: 100%;
+   display: inline-block;
+   border-bottom: 1px dotted #9dbdd6;
+  }
+  .iconfont {
+   display: none;
+  }
+ }
+}

@@ -54,7 +54,7 @@ export default {
       default: true,
     },
   },
-  setup(props: any, context: any) {
+  setup(props, context) {
     const navCollapse: () => void = () => {
       context.emit("navCollapse", !props.isCollapse);
     };
@@ -64,9 +64,9 @@ export default {
 
     let menuActive = ref<RouteRecordName>(route.path);
     const menuSelect = (index: string, indexPath: any) => {
-      const curPath: string = indexPath.join('')
+      const curPath: string = index
       menuActive.value = curPath;
-      router.push(curPath);
+      router.push({path: curPath});
     };
     const menuList: any = JSON.parse(localStorage.getItem("menuList"));
 
@@ -87,6 +87,7 @@ export default {
 .menu-area {
   flex-grow: 1;
   border-right: 1px solid #e5e5e5;
+  background: #f5f5f5;
 }
 .menu-left-list {
   height: calc(100vh - 127px);
@@ -136,6 +137,7 @@ export default {
   margin-top: 24px;
   text-align: center;
   line-height: 20px;
+  background: #fff;
 }
 .collapse-btn .iconfont {
   color: #24aaff;

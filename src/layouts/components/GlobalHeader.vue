@@ -5,7 +5,7 @@
 
       </div>
       <div class="user-info">
-        <el-dropdown trigger="click">
+        <el-dropdown trigger="click" @command="handleCommand">
           <div class="user-info-toggle">
             <el-avatar size="small">
               <i class="iconfont icon-username"></i>
@@ -16,11 +16,12 @@
           </div>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>黄金糕</el-dropdown-item>
-              <el-dropdown-item>狮子头</el-dropdown-item>
-              <el-dropdown-item>螺蛳粉</el-dropdown-item>
-              <el-dropdown-item>双皮奶</el-dropdown-item>
-              <el-dropdown-item>蚵仔煎</el-dropdown-item>
+              <el-dropdown-item command="userCenter">
+                <i class="iconfont icon-usercenter"></i>用户中心<i class="iconfont icon-arrowRight"></i>
+              </el-dropdown-item>
+              <el-dropdown-item command="logout">
+                <i class="iconfont icon-userclose"></i>退出登录<i class="iconfont icon-arrowRight"></i>
+              </el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -30,17 +31,28 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router'
 export default {
   name: 'GlobalHeader',
   setup () {
     
+    const router= useRouter()
 
-    return {}
+    const handleCommand = (command)=> {
+      if (command === 'userCenter') {
+
+      } else if (command === 'logout') {
+        localStorage.clear()
+        router.push('/login')
+      }
+    }
+
+    return { handleCommand }
   }
 }
 </script>
 
-<style scoped>
+<style lang="less">
 .globalHeader {
   background: #24aaff;
   height: 100%;
@@ -49,16 +61,18 @@ export default {
 .header-right {
   flex: 1;
 }
-.header-right .user-info {
-  float: right;
-  width: 200px;
-  height: 32px;
-  background: #fff;
-  box-shadow: 0px 3px 6px rgb(0 0 0 / 10%);
-  line-height: 32px;
-  margin-top: 16px;
-  margin-right: 20px;
-  border-radius: 4px;
+.header-right {
+  .user-info {
+    float: right;
+    width: 200px;
+    height: 32px;
+    background: #fff;
+    box-shadow: 0px 3px 6px rgb(0 0 0 / 10%);
+    line-height: 32px;
+    margin-top: 16px;
+    margin-right: 20px;
+    border-radius: 4px;
+  }
 }
 .user-info .user-info-toggle {
   height: 100%;
@@ -88,5 +102,15 @@ export default {
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+// 用户登陆退出
+.el-dropdown__popper {
+  .el-dropdown-menu {
+    width: 200px;
+    padding: 0;
+  }
+  .el-popper__arrow {
+    display: none;
+  }
 }
 </style>

@@ -1,12 +1,25 @@
 import { getSystemMenu } from '../api/auth/auth'
 import BasicLayout from '/@/layouts/BasicLayout.vue'
 
+
+
 export const generateSyncRouter: () => Promise<unknown> = () => {
  return new Promise((resolve, reject) => {
   getSystemMenu().then( (res: any) => {
    const routerData: any[] = formatData(res.data)
    const routers: any = generteRouter(routerData, null)
-   resolve(routers)
+  const home: any = [{
+    path: '/dashboard/home',
+    name: 'home',
+    component: () => import('/@/views/dashboard/Home.vue'),
+    meta: {
+      title: '首页',
+      showlink: true,
+      savedPosition: false,
+      icon: 'home'
+    },
+  }]
+   resolve(home.concat(routers))
   }).catch((err: any) => {
    reject(err)
   })

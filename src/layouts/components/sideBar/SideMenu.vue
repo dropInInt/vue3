@@ -3,6 +3,7 @@
     <el-submenu
       v-if="item.children && item.children.length > 0"
       :index="resolvePath(item.path)"
+      popper-append-to-body
     >
       <template #title>
         <i :class="`iconfont icon-${item.meta.icon}`"></i>
@@ -16,10 +17,14 @@
           :basePath="item.path"
         ></SideMenu>
     </el-submenu>
+    <el-menu-item v-else-if="item.name === 'home'" :index="resolvePath(item.path)">
+        <i :class="`iconfont icon-${item.meta.icon}`"></i>
+        <template #title><span>{{ item.meta.title }}</span></template>
+      </el-menu-item>
     <template v-else>
       <Link :to="resolvePath(item.path)">
         <el-menu-item :index="resolvePath(item.path)">
-          <i :class="`iconfont icon-${item.meta.icon}`"></i>
+          <i class="iconfont icon-open"></i>
           <template #title>{{ item.meta.title }}</template>
         </el-menu-item>
       </Link>

@@ -47,7 +47,7 @@ export default {
  },
  setup() {
   const signUpMode = ref<boolean>(false)
-  
+
   return { signUpMode, loginUser, rules, registerUser, registerRules }
  }
 }

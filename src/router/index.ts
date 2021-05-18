@@ -7,7 +7,13 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Home',
     component: BasicLayout,
-    redirect: '/mainSet/departmentManage',
+    redirect: '/dashboard/home',
+    meta: {
+      title: '首页',
+      showlink: true,
+      savedPosition: false,
+      icon: 'home'
+    },
     children: [
       {
         path: '/dashboard/home',

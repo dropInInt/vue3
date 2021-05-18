@@ -30,7 +30,7 @@ export default {
     let navWidth = ref<string>('200px')
     let isCollapse = ref<boolean>(false)
 
-    const navCollapse = (params) => {
+    const navCollapse = (params: boolean) => {
       isCollapse.value = params
       params ? navWidth.value = '63px' : navWidth.value = '200px'
     }

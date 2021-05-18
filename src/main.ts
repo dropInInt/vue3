@@ -10,7 +10,7 @@ import './mock/mock.js'
 import './assets/iconfont/iconfont.css'
 
 //引入公共樣式
-import './style/index.css'
+import './style/index.less'
 
 import './utils/permission'
 
