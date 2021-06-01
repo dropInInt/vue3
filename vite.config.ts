@@ -18,7 +18,7 @@ const viteConfig: UserConfig = {
     '/spd': {
       changeOrigin: true,
       secure: false,
-      target: 'http://124.71.200.160:8885/'
+      target: ''
     }
   },
 }
